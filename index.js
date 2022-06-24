@@ -6,6 +6,7 @@ dotenv.config()
 require("./Helpers/dbConnection")
 require("./MiddleWares/errorHandler")
 app.use('/',require('./routes/userRouter'))
+app.use('/',require('./routes/postRoute'))
 
 app.listen(5000,()=>{
     console.log('express connected')
