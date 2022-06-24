@@ -1,12 +1,10 @@
 const express=require('express')
-const mongoose=require('mongoose')
 const dotenv=require('dotenv')
 const app=express()
 app.use(express.json())
 dotenv.config()
-mongoose.connect('mongodb://localhost/todos',()=>{
-    console.log('db connected')
-})
+require("./Helpers/dbConnection")
+require("./MiddleWares/errorHandler")
 app.use('/',require('./routes/userRouter'))
 
 app.listen(5000,()=>{
