@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
 
-//rafiul
            id:{
               type: Number ,
                require: true
@@ -26,33 +25,6 @@ const postsSchema = mongoose.Schema({
         type: Date,
         require: true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-//murad
-
-
-
-
-
-
-
-
-
-
-
-
-    //rafiul
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
