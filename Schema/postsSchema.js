@@ -37,7 +37,7 @@ const postsSchema = mongoose.Schema({
 
 
 
-
+//murad
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
