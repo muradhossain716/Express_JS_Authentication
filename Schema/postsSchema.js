@@ -39,6 +39,10 @@ const postsSchema = mongoose.Schema({
 
 
 
+
+
+
+
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
