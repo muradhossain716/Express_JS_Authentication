@@ -1,15 +1,7 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
 
-
-
-
-
-
-
-
-
-
+//rafiul
            id:{
               type: Number ,
                require: true
