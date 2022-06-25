@@ -9,6 +9,7 @@ require("./Helpers/dbConnection")
 require("./MiddleWares/errorHandler")
 app.use('/',require('./routes/userRouter'))
 app.use('/',require('./routes/postRoute'))
+app.use('/',require('./routes/catagoryRoutes'))
 app.use('/',require('./routes/commentRoute'))
 
 
