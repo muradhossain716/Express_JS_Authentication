@@ -9,7 +9,7 @@ app.use('/',require('./routes/userRouter'))
 app.use('/',require('./routes/postRoute'))
 
 app.get('/',(req,res)=>{
-    res.send("Hello world")
+    res.send("Hello world there")
 })
 app.listen(5000,()=>{
     console.log('express connected')
