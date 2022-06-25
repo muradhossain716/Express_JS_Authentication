@@ -25,6 +25,15 @@ const postsSchema = mongoose.Schema({
         require: true
     }
 
+
+
+
+
+
+
+
+
+
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
