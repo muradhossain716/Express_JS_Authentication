@@ -8,6 +8,9 @@ require("./MiddleWares/errorHandler")
 app.use('/',require('./routes/userRouter'))
 app.use('/',require('./routes/postRoute'))
 
-app.listen(5000,()=>{
+app.get('/',(req,res)=>{
+    res.send("Hello world there")
+})
+app.listen(process.env.PORT,()=>{
     console.log('express connected')
 })
