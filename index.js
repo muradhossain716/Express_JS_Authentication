@@ -12,7 +12,6 @@ app.use('/',require('./routes/postRoute'))
 app.use('/',require('./routes/commentRoute'))
 
 
-
 app.get('/',(req,res)=>{
     res.send("Hello world")
 })

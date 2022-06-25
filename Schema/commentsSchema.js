@@ -17,5 +17,4 @@ const commentsSchema = mongoose.Schema({
         require: true
     }
 })
-
 module.exports= new mongoose.model("comment",commentsSchema)
