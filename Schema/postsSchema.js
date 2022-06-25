@@ -40,6 +40,19 @@ const postsSchema = mongoose.Schema({
 
 
 //murad
+
+
+
+
+
+
+
+
+
+
+
+
+    //rafiul
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
