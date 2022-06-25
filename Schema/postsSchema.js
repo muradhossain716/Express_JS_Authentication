@@ -5,6 +5,11 @@ const postsSchema = mongoose.Schema({
 
 
 
+
+
+
+
+
            id:{
               type: Number ,
                require: true
