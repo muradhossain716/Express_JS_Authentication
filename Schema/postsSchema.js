@@ -27,6 +27,19 @@ const postsSchema = mongoose.Schema({
         require: true
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+    //rafiul
 })
 
 module.exports= new mongoose.model("posts",postsSchema)
