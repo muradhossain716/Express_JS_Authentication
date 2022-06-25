@@ -7,7 +7,7 @@ require("./Helpers/dbConnection")
 require("./MiddleWares/errorHandler")
 app.use('/',require('./routes/userRouter'))
 app.use('/',require('./routes/postRoute'))
-
+app.use('/',require('./routes/catagoryRoutes'))
 app.get('/',(req,res)=>{
     res.send("Hello world there")
 })

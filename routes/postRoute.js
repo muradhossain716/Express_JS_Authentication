@@ -55,4 +55,6 @@ router.delete("/delete-post/:id",async (req,res)=>{
     }
     console.log(result)
 })
+
+
 module.exports =router
