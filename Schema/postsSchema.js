@@ -1,15 +1,5 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
-
-
-
-
-
-
-
-
-
-
            id:{
               type: Number ,
                require: true
