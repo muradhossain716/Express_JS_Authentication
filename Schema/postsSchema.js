@@ -1,16 +1,11 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
-
-           id:{
-              type: Number ,
-               require: true
-           } ,
-    user_id:{
-        type: Number,
+    catagory_name:{
+        type: String,
         require: true
     },
-    catagory_id:{
-        type: Number,
+    post_title:{
+        type: String,
         require: true
     },
     text:{
@@ -18,10 +13,6 @@ const postsSchema = mongoose.Schema({
         require: true
     },
     create_date:{
-        type: Date,
-        require: true
-    },
-    delete_date:{
         type: Date,
         require: true
     }

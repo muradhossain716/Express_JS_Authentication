@@ -12,7 +12,24 @@ router.post("/insert",async (req,res)=>{
         })
     }catch(err){
         res.status(201).json({
-            status: "insert not success"
+            status: "insert not success",
+            "error":err
+        })
+    }
+})
+
+//get all post
+router.get("/all-post",async (req,res)=>{
+
+    try{
+        const allPost = await user.find()
+        res.status(201).json({
+            status: "Get all post successfully",
+            'result':allPost
+        })
+    }catch(err){
+        res.status(201).json({
+            status: "can't get any post"
         })
     }
 })
@@ -20,9 +37,8 @@ router.post("/insert",async (req,res)=>{
 
 router.put('/update-post/:id',async(req,res)=>{
     const result = await  user.findByIdAndUpdate(req.params.id,req.body,{
-        id: req.body.id,
-        user_id: req.body.id,
-        catagory_id: req. catagory_id,
+        catagory_name: req.catagory_name,
+        post_title:req.post_title,
         text: req.body.text,
         create_date : req.body.create_date,
         delete_date : req.body.delete_date
@@ -42,7 +58,7 @@ router.put('/update-post/:id',async(req,res)=>{
 })
 // delete post
 router.delete("/delete-post/:id",async (req,res)=>{
-    const result = await  user.findByIdAndUpdate(req.params.id);
+     await  user.findByIdAndDelete(req.params.id);
     try{
         res.status(201).json({
             status: "Delete Success"
@@ -53,7 +69,7 @@ router.delete("/delete-post/:id",async (req,res)=>{
             status: "Delete was not success"
         })
     }
-    console.log(result)
+
 })
 
 

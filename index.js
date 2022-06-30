@@ -1,9 +1,10 @@
 const express=require('express')
 const dotenv=require('dotenv')
 const app=express()
+const cors=require('cors')
 app.use(express.json())
 dotenv.config()
-
+app.use(cors())
 
 require("./Helpers/dbConnection")
 require("./MiddleWares/errorHandler")

@@ -1,13 +1,12 @@
 
 const mongoose= require('mongoose')
 const catagory = require("../Schema/CatagorySchema");
-const catagoryController= async (req, res)=> {
+const createCatagory= async (req, res)=> {
     try {
         console.log('i am in')
         const newCatagory = new catagory({
             catagory_name: req.body.catagory_name
         })
-        console.log(newCatagory,'catagory')
         await newCatagory.save()
         res.status(200).json({
             "message": "Catagory added successfully"
@@ -34,6 +33,7 @@ const getCatagory= async (req,res)=>{
 }
 const getAllCatagory= async (req,res)=>{
     try{
+        console.log('i am in')
         const post=await catagory.find()
         console.log(post,'get all')
         res.status(200).json({
@@ -58,9 +58,10 @@ const getAllCatagory= async (req,res)=>{
 const updateCatagory=async (req,res)=>{
     try{
 
-        const post=catagory.updateOne(
-            {_id:req.body.params.id},
-            {catagory_name:req.body.catagory_name})
+        const post=await catagory.findOneAndUpdate(
+            {_id:req.params.id},
+            {catagory_name:req.body.data.catagory_name})
+        console.log('updated')
         res.status(200).json({
             'result':post
         })
@@ -75,7 +76,7 @@ const updateCatagory=async (req,res)=>{
 const deleteCatagory=async (req,res)=>{
     try{
 
-        const post=catagory.deleteOne({_id:req.body.params.id})
+        await catagory.deleteOne({_id:req.params.id})
         res.status(200).json({
             'result':'Deleted successfully'
         })
@@ -87,4 +88,4 @@ const deleteCatagory=async (req,res)=>{
     }
 
 }
-module.exports ={catagoryController,getCatagory,getAllCatagory,updateCatagory,deleteCatagory};
+module.exports ={createCatagory,getCatagory,getAllCatagory,updateCatagory,deleteCatagory};
