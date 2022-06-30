@@ -33,8 +33,8 @@ router.get("/all-post",async (req,res)=>{
         })
     }
 })
-//updated post
 
+//updated post
 router.put('/update-post/:id',async(req,res)=>{
     const result = await  user.findByIdAndUpdate(req.params.id,req.body,{
         catagory_name: req.catagory_name,
@@ -44,7 +44,6 @@ router.put('/update-post/:id',async(req,res)=>{
         delete_date : req.body.delete_date
         // new : true,
         // runValidators : true
-
 })
     try{
         res.status(200).json({
@@ -56,6 +55,7 @@ router.put('/update-post/:id',async(req,res)=>{
 
     console.log(result)
 })
+
 // delete post
 router.delete("/delete-post/:id",async (req,res)=>{
      await  user.findByIdAndDelete(req.params.id);
@@ -71,6 +71,4 @@ router.delete("/delete-post/:id",async (req,res)=>{
     }
 
 })
-
-
 module.exports =router
