@@ -1,6 +1,6 @@
 const express=require('express');
 const user=require('../Schema/User1Schema')
-const bcrypt= require('bcrypt')
+const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken')
 const {get} = require("mongoose");
 
@@ -11,7 +11,11 @@ const signupController = async(req,res)=>{
         const newUser=new user({
             user_name:req.body.user_name,
             email:req.body.email,
-            password:hashPassword
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            password:hashPassword,
+            created_at: req.body.created_at,
+            country_code: req.body.country_code
         })
         await newUser.save()
         res.status(200).json({

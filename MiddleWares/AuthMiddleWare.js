@@ -13,8 +13,6 @@ const checkLogin=async(req,res,next)=>{
         else{
             next('Authentication failed')
         }
-
-
       }
       catch(err){
         res.status(300).json('Authentication Failed')
