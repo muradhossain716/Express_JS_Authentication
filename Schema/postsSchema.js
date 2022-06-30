@@ -1,43 +1,21 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
-           id:{
-              type: Number ,
-               require: true
-           } ,
-    user_id:{
-        type: Number,
+    catagory_name:{
+        type: String,
         require: true
     },
-    catagory_id:{
-        type: Number,
+    post_title:{
+        type: String,
         require: true
     },
-    text:{
+    text_content:{
         type: String,
         require: true
     },
     create_date:{
         type: Date,
         require: true
-    },
-    delete_date:{
-        type: Date,
-        require: true
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 })
 
 module.exports= new mongoose.model("posts",postsSchema)

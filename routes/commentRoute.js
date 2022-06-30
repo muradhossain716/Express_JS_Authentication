@@ -16,7 +16,6 @@ router.post('/comment-create',async (req,res)=>{
       })
     }
 })
-
 //Update Comment
 router.put('/update-comment/:id',async (req,res)=>{
     const result =await user.findByIdAndUpdate(req.params.id,req.body,{

@@ -1,5 +1,5 @@
 const mongoose=require('mongoose')
-const mySchema=mongoose.Schema({
+const user=mongoose.Schema({
     user_name:{
         type:String,
         required:true
@@ -13,4 +13,4 @@ const mySchema=mongoose.Schema({
         required:true
     }
 })
-module.exports=new mongoose.model('user',mySchema)
+module.exports=new mongoose.model('user',user)
