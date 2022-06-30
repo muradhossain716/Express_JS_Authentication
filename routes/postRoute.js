@@ -39,7 +39,7 @@ router.put('/update-post/:id',async(req,res)=>{
     const result = await  user.findByIdAndUpdate(req.params.id,req.body,{
         catagory_name: req.catagory_name,
         post_title:req.post_title,
-        text: req.body.text,
+        text: req.body.text_content,
         create_date : req.body.create_date,
         delete_date : req.body.delete_date
         // new : true,

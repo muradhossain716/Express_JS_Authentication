@@ -8,7 +8,7 @@ const postsSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    text:{
+    text_content:{
         type: String,
         require: true
     },
