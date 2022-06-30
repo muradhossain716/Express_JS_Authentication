@@ -16,6 +16,8 @@ router.get('/privetroute',checkLogin,async (req,res)=>{
         'user_name':req.user_name
     })
 })
+
+
 router.delete('/delete-user/:id',deleteUser)
 router.get('/get-all-user',getAllUser)
 
