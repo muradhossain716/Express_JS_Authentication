@@ -1,5 +1,5 @@
 const express=require('express');
-const user=require('../Schema/UserSchema')
+const user=require('../Schema/User1Schema')
 const bcrypt= require('bcrypt')
 const jwt=require('jsonwebtoken')
 const {get} = require("mongoose");

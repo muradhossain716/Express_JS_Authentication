@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router()
-const user=require('../Schema/UserSchema')
+const user=require('../Schema/User1Schema')
 const bcrypt= require('bcrypt')
 const jwt=require('jsonwebtoken')
 const {checkLogin} =require('../MiddleWares/AuthMiddleWare')
