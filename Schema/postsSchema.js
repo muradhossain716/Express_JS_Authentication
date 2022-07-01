@@ -15,16 +15,16 @@ const postsSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    comment:{
-        type: mongoose.Types.ObjectId,
-        ref: "comment"
-    }
-    // comment: [
-    //     {
-    //         type: mongoose.Types.ObjectId,
-    //         ref: "comment"
-    //     }
-    // ]
+    // comment:{
+    //     type: mongoose.Types.ObjectId,
+    //     ref: "comment"
+    // }
+    comment: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "comment"
+        }
+    ]
 
 }, {timestamps: true})
 

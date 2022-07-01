@@ -1,12 +1,36 @@
 const express =require('express')
 const router = express.Router();
-const user= require('../Schema/commentsSchema')
-
+const comment= require('../Schema/commentsSchema')
+const postsSchema= require("../Schema/postsSchema")
+const {checkLogin} = require("../MiddleWares/AuthMiddleWare")
 //Create Comment
-router.post('/comment-create',async (req,res)=>{
-  const newComment =new user(req.body)
+router.post('/comment-create',checkLogin,async (req,res)=>{
+    console.log( "mnb" ,req.user_id)
+    // db.students.updateOne(
+    //     { _id: 1 },
+    //     { $push: { scores: 89 } }
+    // )
+  const newComment =new comment({
+      text: req.body.text,
+    user: req.user_id
+
+  })
     try{
-      await newComment.save()
+      let x = await newComment.save()
+
+        postsSchema.findByIdAndUpdate(
+            req.body.id,
+            { $push: { "comment": x._id } },
+        function (err, docs) {
+            if (err){
+                console.log(err)
+            }
+            else{
+                console.log("Updated User : ", docs);
+            }
+        }
+        );
+
         res.status(201).json({
             status: "Comment Create Success"
         })
@@ -18,7 +42,7 @@ router.post('/comment-create',async (req,res)=>{
 })
 //Update Comment
 router.put('/update-comment/:id',async (req,res)=>{
-    const result =await user.findByIdAndUpdate(req.params.id,req.body,{
+    const result =await comment.findByIdAndUpdate(req.params.id,req.body,{
         new: true,
         runValidators: true
     })
@@ -35,7 +59,7 @@ router.put('/update-comment/:id',async (req,res)=>{
 })
 // Delete Post
 router.delete("/delete-comment/:id",async (req,res)=>{
-    const result = await  user.findByIdAndUpdate(req.params.id);
+    const result = await  comment.findByIdAndUpdate(req.params.id);
     try{
         res.status(201).json({
             status: "Delete Success"

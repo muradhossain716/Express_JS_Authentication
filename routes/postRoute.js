@@ -1,11 +1,11 @@
 const express =require('express')
 const router=express.Router()
-const user=require('../Schema/postsSchema')
+const post=require('../Schema/postsSchema')
 const {checkLogin} = require("../MiddleWares/AuthMiddleWare")
 
 //created post
 router.post("/insert",checkLogin,async (req,res)=>{
-    const newPost = new user({
+    const newPost = new post({
         ...req.body,
         comment : req.user_id
     })
@@ -26,7 +26,7 @@ router.post("/insert",checkLogin,async (req,res)=>{
 router.get("/all-post",async (req,res)=>{
 
     try{
-        const allPost = await user.find()
+        const allPost = await post.find()
         res.status(201).json({
             status: "Get all post successfully",
             'result':allPost
@@ -38,9 +38,54 @@ router.get("/all-post",async (req,res)=>{
     }
 })
 
+//get post with comment
+
+// public courseListRead(): Promise<ICourse[]> {
+//     return this.courseModel.find().sort({
+//         index: 1
+//     }).populate('instructor').populate({
+//         path: 'categories',
+//         populate: {
+//             path: 'posts',
+//             model: 'CourseCategoryPost'
+//         }
+//     }).exec();
+// }
+
+router.get("/post-with-comment", (req, res) => {
+    post.find()
+        .populate("comment")
+        .populate('user')
+        .lean()
+        // .select({
+        //     _id: 0,
+        //     __v: 0,
+        //     date: 0,
+        // })
+        // .limit(2)
+        .exec((err, data) => {
+            if (err) {
+                res.status(500).json({
+                    error: "There was a server side error!",
+                });
+            } else {
+                res.status(200).json({
+                    result: data,
+                    message: "Success",
+                });
+            }
+        });
+});
+
+
+
+
+
+
+
 //updated post
 router.put('/update-post/:id',async(req,res)=>{
-    const result = await  user.findByIdAndUpdate(req.params.id,req.body,{
+    const result = await  post.findByIdAndUpdate(req.params.id,req.body,{
         catagory_name: req.catagory_name,
         post_title:req.post_title,
         text: req.body.text_content,
@@ -62,7 +107,7 @@ router.put('/update-post/:id',async(req,res)=>{
 
 // delete post
 router.delete("/delete-post/:id",async (req,res)=>{
-     await  user.findByIdAndDelete(req.params.id);
+     await  post.findByIdAndDelete(req.params.id);
     try{
         res.status(201).json({
             status: "Delete Success"
