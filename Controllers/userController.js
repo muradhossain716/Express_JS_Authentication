@@ -28,9 +28,11 @@ const signupController = async(req,res)=>{
 }
 
 const loginController= async(req,res)=>{
+    console.log(req.body)
     try{
         const {user_name,password}=req.body;
         const exists= await user.findOne({user_name:user_name})
+        console.log(exists)
         if(exists){
             try{
                 const isPasswordValid= await bcrypt.compare(password,exists.password)

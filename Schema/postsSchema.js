@@ -1,21 +1,23 @@
 const mongoose = require('mongoose')
 const postsSchema = mongoose.Schema({
-    catagory_name:{
-        type: String,
-        require: true
-    },
-    post_title:{
-        type: String,
-        require: true
-    },
-    text_content:{
-        type: String,
-        require: true
-    },
-    create_date:{
-        type: Date,
-        require: true
-    }
-})
 
-module.exports= new mongoose.model("posts",postsSchema)
+    user_id: {
+        type: String,
+        require: true
+    },
+    category_id: {
+        type: String,
+    },
+    post_title: {
+        type: String,
+        require: true
+    },
+    text: {
+        type: String,
+        require: true
+    },
+
+}, {timestamps: true})
+
+module.exports = new mongoose.model("posts", postsSchema)
+
