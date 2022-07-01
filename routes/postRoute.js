@@ -1,10 +1,14 @@
 const express =require('express')
 const router=express.Router()
 const user=require('../Schema/postsSchema')
+const {checkLogin} = require("../MiddleWares/AuthMiddleWare")
 
 //created post
-router.post("/insert",async (req,res)=>{
-    const newPost = new user(req.body)
+router.post("/insert",checkLogin,async (req,res)=>{
+    const newPost = new user({
+        ...req.body,
+        comment : req.user_id
+    })
     try{
         await newPost.save()
         res.status(201).json({
