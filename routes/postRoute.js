@@ -6,8 +6,7 @@ const {checkLogin} = require("../MiddleWares/AuthMiddleWare")
 //created post
 router.post("/insert",checkLogin,async (req,res)=>{
     const newPost = new post({
-        ...req.body,
-        comment : req.user_id
+        ...req.body
     })
     try{
         await newPost.save()
@@ -54,15 +53,7 @@ router.get("/all-post",async (req,res)=>{
 
 router.get("/post-with-comment", (req, res) => {
     post.find()
-        .populate("comment")
-        .populate('user')
-        .lean()
-        // .select({
-        //     _id: 0,
-        //     __v: 0,
-        //     date: 0,
-        // })
-        // .limit(2)
+        .populate({path:"comment",populate:{path:"user"}})
         .exec((err, data) => {
             if (err) {
                 res.status(500).json({

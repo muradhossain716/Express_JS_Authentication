@@ -1,10 +1,13 @@
 const jwt = require("jsonwebtoken");
-
+// const mytoken=req.header('auth').split(' ');
 const checkLogin=async(req,res,next)=>{
     const { authorization }=req.headers;
-    const token= authorization.split(' ')[1];
+    console.log(req.headers)
+    // console.log( "authori",authorization);
+    // const token= authorization.split(' ')[1];
+
     try{
-        const decoded= await jwt.verify(token, process.env.SECRET_KEY)
+        const decoded= await jwt.verify(authorization, process.env.SECRET_KEY)
         if(decoded){
             req.user_name=decoded.user_name
             req.user_id=decoded.user_id
