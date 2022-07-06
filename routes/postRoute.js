@@ -1,10 +1,13 @@
 const express =require('express')
 const router=express.Router()
-const user=require('../Schema/postsSchema')
+const post=require('../Schema/postsSchema')
+const {checkLogin} = require("../MiddleWares/AuthMiddleWare")
 
 //created post
-router.post("/insert",async (req,res)=>{
-    const newPost = new user(req.body)
+router.post("/insert",checkLogin,async (req,res)=>{
+    const newPost = new post({
+        ...req.body
+    })
     try{
         await newPost.save()
         res.status(201).json({
@@ -12,23 +15,75 @@ router.post("/insert",async (req,res)=>{
         })
     }catch(err){
         res.status(201).json({
-            status: "insert not success"
+            status: "insert not success",
+            "error":err
         })
     }
 })
-//updated post
 
+//get all post
+router.get("/all-post",async (req,res)=>{
+
+    try{
+        const allPost = await post.find()
+        res.status(201).json({
+            status: "Get all post successfully",
+            'result':allPost
+        })
+    }catch(err){
+        res.status(201).json({
+            status: "can't get any post"
+        })
+    }
+})
+
+//get post with comment
+
+// public courseListRead(): Promise<ICourse[]> {
+//     return this.courseModel.find().sort({
+//         index: 1
+//     }).populate('instructor').populate({
+//         path: 'categories',
+//         populate: {
+//             path: 'posts',
+//             model: 'CourseCategoryPost'
+//         }
+//     }).exec();
+// }
+
+router.get("/post-with-comment", (req, res) => {
+    post.find()
+        .populate({path:"comment",populate:{path:"user"}})
+        .exec((err, data) => {
+            if (err) {
+                res.status(500).json({
+                    error: "There was a server side error!",
+                });
+            } else {
+                res.status(200).json({
+                    result: data,
+                    message: "Success",
+                });
+            }
+        });
+});
+
+
+
+
+
+
+
+//updated post
 router.put('/update-post/:id',async(req,res)=>{
-    const result = await  user.findByIdAndUpdate(req.params.id,req.body,{
-        id: req.body.id,
-        user_id: req.body.id,
-        catagory_id: req. catagory_id,
-        text: req.body.text,
+    const result = await  post.findByIdAndUpdate(req.params.id,req.body,{
+        catagory_name: req.catagory_name,
+        post_title:req.post_title,
+        text: req.body.text_content,
         create_date : req.body.create_date,
         delete_date : req.body.delete_date
         // new : true,
         // runValidators : true
-
 })
     try{
         res.status(200).json({
@@ -40,9 +95,10 @@ router.put('/update-post/:id',async(req,res)=>{
 
     console.log(result)
 })
+
 // delete post
 router.delete("/delete-post/:id",async (req,res)=>{
-    const result = await  user.findByIdAndUpdate(req.params.id);
+     await  post.findByIdAndDelete(req.params.id);
     try{
         res.status(201).json({
             status: "Delete Success"
@@ -53,6 +109,6 @@ router.delete("/delete-post/:id",async (req,res)=>{
             status: "Delete was not success"
         })
     }
-    console.log(result)
+
 })
 module.exports =router

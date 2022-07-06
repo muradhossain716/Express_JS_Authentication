@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/authentication.iml" filepath="$PROJECT_DIR$/.idea/authentication.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../posts-client/.idea/posts-client.iml" filepath="$PROJECT_DIR$/../posts-client/.idea/posts-client.iml" />
     </modules>
   </component>
 </project>
