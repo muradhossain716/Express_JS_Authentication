@@ -1,10 +1,10 @@
 const express=require('express');
 const router=express.Router()
-const user=require('../Schema/Schema')
+const user=require('../Schema/User1Schema')
 const bcrypt= require('bcrypt')
 const jwt=require('jsonwebtoken')
 const {checkLogin} =require('../MiddleWares/AuthMiddleWare')
-const {signupController,loginController} =require('../Controllers/userController')
+const {signupController,loginController, deleteUser,getAllUser} =require('../Controllers/userController')
 
 router.post('/signup',signupController)
 
@@ -16,5 +16,9 @@ router.get('/privetroute',checkLogin,async (req,res)=>{
         'user_name':req.user_name
     })
 })
+
+
+router.delete('/delete-user/:id',deleteUser)
+router.get('/get-all-user',getAllUser)
 
 module.exports=router;
